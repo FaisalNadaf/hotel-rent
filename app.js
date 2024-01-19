@@ -21,6 +21,19 @@ app.get("/",(req,res)=>{
 });
 
 app.get("/listing", async(req,res)=>{
+    let samplelisting = new listing({
+        title:"my home",
+        discpriction:"my new home in city",
+        price:56413,
+        location:"goa",
+        country:"india",
+
+    });
+    await samplelisting.save(); 
+
+    console.log("sample image saved");
+    res.send("successful testing");
+});
 
 
 
