@@ -46,7 +46,12 @@ app.get("/listings/:id", async(req,res)=>{
 });
 
 /*---------------------------------------create new listing route---------------------------------------------*/
-
+app.post("/listings", async(req,res)=>{
+    const newListing = new listing(req.body.listing);
+    await newListing.save();
+     res.redirect("/listings");
+     
+ });
 
 /*---------------------------------------port---------------------------------------------*/
 app.listen(8080,() =>{
