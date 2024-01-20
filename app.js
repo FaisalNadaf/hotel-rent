@@ -20,20 +20,26 @@ app.get("/",(req,res)=>{
     res.send("hello im root");
 });
 
-app.get("/listing", async(req,res)=>{
-    let samplelisting = new listing({
-        title:"my home",
-        discpriction:"my new home in city",
-        price:56413,
-        location:"goa",
-        country:"india",
+app.get("/listing",async(req,res)=>{
+    const allListing= await listing.find({});
+   
+    res.render("index.ejs",{allListing});
 
-    });
-    await samplelisting.save(); 
-
-    console.log("sample image saved");
-    res.send("successful testing");
 });
+
+// app.get("/listing", async(req,res)=>{
+    // let samplelisting = new listing({
+    //     title:"my home",
+    //     discpriction:"my new home in city",
+    //     price:56413,
+    //     location:"goa",
+    //     country:"india",
+
+    // });
+    // await samplelisting.save(); 
+    // console.log("sample image saved");
+    // res.send("successful testing");
+// });
 
 
 
