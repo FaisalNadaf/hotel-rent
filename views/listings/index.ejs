@@ -6,6 +6,14 @@
     <title>wonder lust</title>
 </head>
 <body>
-    <h3>all lis ting</h3>
+    <h3>all listing</h3>
+
+    <ul>
+        <% for(let listing of allListing){%>
+        <li> <a href="/listings/ <%= listing._id %>"> <%= listing.title %></a></li>
+        <%}%>
+    </ul>
+
+
 </body>
 </html>
