@@ -3,6 +3,9 @@ const app=express();
 const mongoose=require("mongoose");
 let mongo_url="mongodb://127.0.0.1:27017/wonderlust";
 const listing = require("./models/listing.js");
+const path = require("path");
+app.set("view engine","ejs");
+app.set("view",path.join(__dirname,"views"));
 
 
 main().then(()=>{
@@ -22,8 +25,7 @@ app.get("/",(req,res)=>{
 
 app.get("/listing",async(req,res)=>{
     const allListing= await listing.find({});
-   
-    res.render("index.ejs",{allListing});
+    res.render("/listings/index.ejs",{allListing});
 
 });
 
