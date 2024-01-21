@@ -1,6 +1,12 @@
 body{
-    
     font-family: "Plus Jakarta Sans", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.cointainer{
+    flex: 1;
 }
 /*---------------------------------------nav---------------------------------------------*/
 .navbar{
@@ -63,10 +69,12 @@ body{
 
 .card{
     border: none;
+    padding: none;
     margin-bottom: 2rem;
 }
 
 .card-img-top{
+    padding: none;
     border-radius:1rem;
     width: 100%;
     object-fit: cover;
@@ -76,10 +84,12 @@ body{
     }
 
 .card-body{
+    padding: none;
     padding: 0rem;
 }
 
 .card-text p {
+    padding: none;
     font-weight:900;
 }
 
