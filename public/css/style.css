@@ -1,10 +1,12 @@
 body{
+    
     font-family: "Plus Jakarta Sans", sans-serif;
 }
 /*---------------------------------------nav---------------------------------------------*/
 .navbar{
     height: 5rem;
     background-color: white;
+    margin-bottom: 0.5rem;
 }
 
 .fa-house{
@@ -69,6 +71,9 @@ body{
     width: 100%;
     object-fit: cover;
 }
+.card:hover{
+    padding: 0.1rem;
+    }
 
 .card-body{
     padding: 0rem;
@@ -76,4 +81,15 @@ body{
 
 .card-text p {
     font-weight:900;
+}
+
+/*---------------------------------------card hover---------------------------------------------*/
+
+.card-img-overlay{
+    opacity: 0;
+}
+
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
 }
