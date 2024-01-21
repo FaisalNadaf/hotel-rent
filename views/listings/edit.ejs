@@ -6,7 +6,7 @@
     <title>wonderlust</title>
 </head>
 <body>
-    <form method="POST" action="/listings/<%= listing._id %>?method=PUT">
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
         <h3>edit your listing</h3>
         <input type="text" name="listing[title]" value="<%= listing.title %>">
         <br><br>

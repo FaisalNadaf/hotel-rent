@@ -5,11 +5,13 @@ const listing = require("./models/listing.js");
 const path = require("path");
 const Listing = require("./models/listing.js");
 const methodOverride =require("method-override");
+const  engine = require('ejs-mate');
 
 app.set("View engine","ejs");
 app.set("View",path.join(__dirname,"Views"));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
+app.engine('ejs', engine);
 
 let mongo_url="mongodb://127.0.0.1:27017/wonderlust";
 /*---------------------------------------main---------------------------------------------*/
@@ -66,8 +68,17 @@ app.post("/listings", async(req,res)=>{
 app.put("/listings/:id", async(req,res)=>{
     let {id}=req.params;
     await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    res.redirect(`/listings/${id}`);
+ }); 
+
+ /*---------------------------------------delete listing route---------------------------------------------*/
+app.delete("/listings/:id", async(req,res)=>{
+    let {id}=req.params;
+    let deletedListing = await Listing.findByIdAndDelete(id);
+    console.log(deletedListing);
     res.redirect("/listings");
  }); 
+
 
 /*---------------------------------------port---------------------------------------------*/
 app.listen(8080,() =>{

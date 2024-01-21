@@ -15,5 +15,10 @@
         <li><%= listing.country %></li>
         <a href="/listings/<%= listing._id %>/edit ">edit </a>
     </ul>
+    <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+        <button>
+            DELETE listing
+        </button>
+    </form>
 </body>
 </html>
