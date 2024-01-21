@@ -1,0 +1,25 @@
+
+/*---------------------------------------nav---------------------------------------------*/
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-house{
+    font-size: 2rem;
+    color: #FF385C;
+}
+
+.nav-link{
+    color: #222222;
+}
+
+/*---------------------------------------footer---------------------------------------------*/
+
+.f-info-link a{
+    text-decoration: none;
+}
+
+.f-info-link a:hover{
+    text-decoration: underline;
+}
