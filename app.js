@@ -1,15 +1,17 @@
 const express=require("express");
 const app=express();
 const mongoose=require("mongoose");
-let mongo_url="mongodb://127.0.0.1:27017/wonderlust";
 const listing = require("./models/listing.js");
 const path = require("path");
 const Listing = require("./models/listing.js");
+const methodOverride =require("method-override");
+
 app.set("View engine","ejs");
 app.set("View",path.join(__dirname,"Views"));
 app.use(express.urlencoded({extended:true}));
+app.use(methodOverride("_method"));
 
-
+let mongo_url="mongodb://127.0.0.1:27017/wonderlust";
 /*---------------------------------------main---------------------------------------------*/
 main().then(()=>{
     console.log("mongodb connected");
@@ -39,11 +41,11 @@ app.get("/listings/new",(req,res)=>{
     res.render("listings/new.ejs");
 });
 /*---------------------------------------show route---------------------------------------------*/
-app.get("/listings/:id", async(req,res)=>{
+ app.get("/listings/:id", async(req,res)=>{
     let {id}=req.params;
     const listing =await Listing.findById(id);
     res.render("listings/show.ejs",{listing});
-});
+ }); 
 
 /*---------------------------------------create new listing route---------------------------------------------*/
 app.post("/listings", async(req,res)=>{
@@ -52,6 +54,20 @@ app.post("/listings", async(req,res)=>{
      res.redirect("/listings");
      
  });
+
+ /*---------------------------------------edit listing route---------------------------------------------*/
+ app.get("/listings/:id/edit", async(req,res)=>{
+    let {id}=req.params;
+    const listing =await Listing.findById(id);
+    res.render("listings/edit.ejs",{listing});
+ }); 
+
+/*---------------------------------------update listing route---------------------------------------------*/
+app.put("/listings/:id", async(req,res)=>{
+    let {id}=req.params;
+    await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    res.redirect("/listings");
+ }); 
 
 /*---------------------------------------port---------------------------------------------*/
 app.listen(8080,() =>{
