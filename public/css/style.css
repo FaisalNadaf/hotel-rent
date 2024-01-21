@@ -1,4 +1,6 @@
-
+body{
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
 /*---------------------------------------nav---------------------------------------------*/
 .navbar{
     height: 5rem;
@@ -22,4 +24,56 @@
 
 .f-info-link a:hover{
     text-decoration: underline;
+}
+
+.f-info-link,
+.f-info-icon,
+.f-info-brand{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.f-info-icon i{
+    height:2rem ;
+    color: rgb(87, 85, 85);
+    margin:0.5rem 1rem 0rem 0rem;
+    font-size: 1.4rem;
+  
+}
+.f-info-icon i:hover{
+    transition:0.3s;
+    color: rgb(0, 0, 0);
+    font-size: 1.8rem;
+}
+
+.f-info{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items:space-evenly;
+    height: 8rem;
+    background-color: rgb(236, 235, 235);
+}
+
+/*---------------------------------------image card---------------------------------------------*/
+
+.card{
+    border: none;
+    margin-bottom: 2rem;
+}
+
+.card-img-top{
+    border-radius:1rem;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-body{
+    padding: 0rem;
+}
+
+.card-text p {
+    font-weight:900;
 }
