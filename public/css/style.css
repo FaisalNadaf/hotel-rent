@@ -79,9 +79,7 @@ body{
     width: 100%;
     object-fit: cover;
 }
-.card:hover{
-    padding: 0.1rem;
-    }
+
 
 .card-body{
     padding: none;
@@ -114,4 +112,17 @@ body{
 
 .row{
     margin:0px;
+}
+
+/*---------------------------------------new listing hover---------------------------------------------*/
+
+.show-img{
+    height: 30vh;
+}
+
+.btns{
+    display: flex;
+}
+.btns button{
+    margin-right: 1rem;
 }

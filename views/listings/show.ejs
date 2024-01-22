@@ -1,12 +1,14 @@
 
 <% layout("listings/layouts/boilerplate") -%>
 <body>
-    <div class="row "><div class="col-8 offset-2">
+    <div class="row ">
+        <div class="col-8 offset-3">
         
-    <h3>listing deteils</h3>
-
-    <div class="card" >
-        <img src="<%= listing.image %>" class="card-img-top" alt="..." >
+    <h3>LISTING  DETAILS</h3>
+</div>
+    <div class="card col-6 offset-3" >
+        <img src="<%= listing.image %>" class="card-img-top show-img" alt="..." >
+    
         <div class="card-body">
           <p class="card-text">
             <b> <p><%= listing.title %></p></b>
@@ -16,9 +18,9 @@
             <p><%= listing.country %></p>
           </p>
         </div>
-      </div>
+  
 
-    
+    <div class="btns">
         <a href="/listings/<%= listing._id %>/edit ">
             <button class="btn btn-dark add-btn">
                 EDIT
@@ -27,8 +29,9 @@
 
     <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
         <button  class="btn btn-dark add-btn">
-            DELETE listing
+            DELETE
         </button>
     </form>
+</div>
     </div></div>
 </body>
