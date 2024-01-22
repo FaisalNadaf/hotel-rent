@@ -6,6 +6,7 @@ const path = require("path");
 const Listing = require("./models/listing.js");
 const methodOverride =require("method-override");
 const  ejsMate= require('ejs-mate');
+const wrapAsync=require("./utility/wrapAsync.js")
 
 app.set("View engine","ejs");
 app.set("View",path.join(__dirname,"Views"));
@@ -51,12 +52,12 @@ app.get("/listings/new",(req,res)=>{
  }); 
 
 /*---------------------------------------create new listing route---------------------------------------------*/
-app.post("/listings", async(req,res)=>{
-    const newListing = new listing(req.body.listing);
-    await newListing.save();
-     res.redirect("/listings");
-     
- });
+app.post("/listings",wrapAsync (async(req,res,next)=>{
+        const newListing = new listing(req.body.listing);
+        await newListing.save();
+         res.redirect("/listings");
+       
+ }));
 
  /*---------------------------------------edit listing route---------------------------------------------*/
  app.get("/listings/:id/edit", async(req,res)=>{
@@ -79,6 +80,12 @@ app.delete("/listings/:id", async(req,res)=>{
     console.log(deletedListing);
     res.redirect("/listings");
  }); 
+
+ /*---------------------------------------ERROR HANDLING---------------------------------------------*/
+
+app.use((err,req,res,next)=>{
+res.send("somthing went wrong");
+});
 
 
 /*---------------------------------------port---------------------------------------------*/
