@@ -103,3 +103,15 @@ body{
     opacity: 0.2;
     background-color: white;
 }
+
+/*---------------------------------------new listing hover---------------------------------------------*/
+.add-btn{
+    background-color: #FF385C;
+    color: black;
+    padding: 0.5rem 5rem;
+   
+}
+
+.row{
+    margin:0px;
+}
