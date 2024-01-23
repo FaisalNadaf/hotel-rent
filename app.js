@@ -8,6 +8,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utility/wrapAsync.js");
 const ExpressError = require("./utility/expressError.js");
+const {listingSchema}=require("./schema.js");
+
 
 app.set("View engine", "ejs");
 app.set("View", path.join(__dirname, "Views"));
@@ -63,7 +65,12 @@ app.post(
   "/listings",
   wrapAsync(async (req, res, next) => {
     const newListing = new listing(req.body.listing);
-    await newListing.save();
+    let result=listingSchema.validate(req.body);
+    console.log(result);
+    if(result.error){
+        throw new ExpressError(404,result.error);
+    }
+        await newListing.save();
     res.redirect("/listings");
   })
 );
@@ -105,8 +112,8 @@ app.all("*", (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  let { statusCode, message } = err;
-  res.send(statusCode).send(message);
+  let { statusCode=500 , message="somthing went wrong" } = err;
+ res.render("error.ejs");
 });
 
 /*---------------------------------------port---------------------------------------------*/
