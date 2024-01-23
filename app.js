@@ -101,8 +101,9 @@ app.delete(
 
 /*---------------------------------------ERROR HANDLING---------------------------------------------*/
 app.all("*", (req, res, next) => {
-  next(ExpressError(404, "page not found !"));
+  next(ExpressError(404, "page not found!"));
 });
+
 app.use((err, req, res, next) => {
   let { statusCode, message } = err;
   res.send(statusCode).send(message);
