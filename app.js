@@ -6,7 +6,8 @@ const path = require("path");
 const Listing = require("./models/listing.js");
 const methodOverride =require("method-override");
 const  ejsMate= require('ejs-mate');
-const wrapAsync=require("./utility/wrapAsync.js")
+const wrapAsync=require("./utility/wrapAsync.js");
+const ExpressError=require("./utility/expressError.js");
 
 app.set("View engine","ejs");
 app.set("View",path.join(__dirname,"Views"));
@@ -52,7 +53,7 @@ app.get("/listings/new",(req,res)=>{
  }); 
 
 /*---------------------------------------create new listing route---------------------------------------------*/
-app.post("/listings",wrapAsync (async(req,res,next)=>{
+app.post("/listings",wrapAsync(async(req,res,next)=>{
         const newListing = new listing(req.body.listing);
         await newListing.save();
          res.redirect("/listings");
@@ -82,9 +83,12 @@ app.delete("/listings/:id", async(req,res)=>{
  }); 
 
  /*---------------------------------------ERROR HANDLING---------------------------------------------*/
-
+app.all("*",(req,res,next)=>{
+next(ExpressError(404,"page not found !"));
+});
 app.use((err,req,res,next)=>{
-res.send("somthing went wrong");
+    let{statusCode,message}=ree;
+res.send(statusCode).send(message);
 });
 
 
