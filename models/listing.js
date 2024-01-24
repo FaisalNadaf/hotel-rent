@@ -12,10 +12,11 @@ const listingSchema =new Schema ({
     price:Number,
     location:String,
     country:String,
-  review:{
-    type:this.schema.Types.ObjectId,
+  review:[
+    {
+    type:Schema.Types.ObjectId,
     ref:"review",
-  },
+  },],
 
 });
 

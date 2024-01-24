@@ -9,6 +9,7 @@ const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utility/wrapAsync.js");
 const ExpressError = require("./utility/expressError.js");
 const {listingSchema}=require("./schema.js");
+const review = require("./models/review.js");
 
 
 app.set("View engine", "ejs");
@@ -112,10 +113,21 @@ app.delete(
     res.redirect("/listings");
   })
 );
+/*---------------------------------------reviwe post route---------------------------------------------*/
+app.post("/listings/:id/review",async(req,res)=>{
+let listing =Listing.findById(req.params.id);
+let newreview =new review(req.body.review);
+
+listing.review.push(newreview);
+
+await newreview.save();
+await listing.save();
+res.send("review added");
+});
 
 /*---------------------------------------ERROR HANDLING---------------------------------------------*/
 app.all("*", (req, res, next) => {
-  next(ExpressError(404, "page not found!"));
+  next(new ExpressError(404, "page not found!"));
 });
 
 app.use((err, req, res, next) => {
