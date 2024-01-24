@@ -32,6 +32,17 @@ async function main() {
   await mongoose.connect(mongo_url);
 }
 
+/*---------------------------------------validatelisting---------------------------------------------*/
+const validateListing=(req,res,next)=>{
+let {error}= listingSchema.validate(req.body);
+if(error){
+  let errMsg=error.details.map((el)=>el.message).join(",");
+    throw new ExpressError(404,errMsg);
+}else{
+  next();
+}
+}
+
 /*---------------------------------------root route---------------------------------------------*/
 app.get("/", (req, res) => {
   res.send("hello im root");
@@ -62,14 +73,10 @@ app.get(
 
 /*---------------------------------------create new listing route---------------------------------------------*/
 app.post(
-  "/listings",
+  "/listings",validateListing,
   wrapAsync(async (req, res, next) => {
     const newListing = new listing(req.body.listing);
-    let result=listingSchema.validate(req.body);
-    console.log(result);
-    if(result.error){
-        throw new ExpressError(404,result.error);
-    }
+    
         await newListing.save();
     res.redirect("/listings");
   })
@@ -87,7 +94,7 @@ app.get(
 
 /*---------------------------------------update listing route---------------------------------------------*/
 app.put(
-  "/listings/:id",
+  "/listings/:id",validateListing,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, { ...req.body.listing });
