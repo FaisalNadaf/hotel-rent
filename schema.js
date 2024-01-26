@@ -11,3 +11,11 @@ image:Joi.string().allow("",null),
 }).required(),
 
 });
+
+module.exports.reviewSchema =joi.oblect({
+review:joi.object({
+    rating:Joi.number().required(),
+    comment:Joi.string().required(),
+}).required(),
+    
+});

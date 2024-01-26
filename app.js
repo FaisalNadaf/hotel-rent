@@ -116,7 +116,7 @@ app.delete(
   })
 );
 /*---------------------------------------reviwe post route---------------------------------------------*/
-app.post("/listings/:id/reviews", wrapAsync(async (req, res) => {
+app.post("/listings/:id/reviews", async (req, res) => {
   let listing = await Listing.findById(req.params.id);
   let newReview = await new review(req.body.review);
 
@@ -124,9 +124,8 @@ app.post("/listings/:id/reviews", wrapAsync(async (req, res) => {
 
   await newReview.save();
   await listing.save();
-  console.log("review saved");
-  res.send("review added");
-}));
+  res.redirect(`/listings/${listing._id}`);
+});
 
 /*---------------------------------------ERROR HANDLING---------------------------------------------*/
 app.all("*", (req, res, next) => {
