@@ -54,21 +54,11 @@
 
             <h5 class="card-title">Card title</h5>
             <p class="card-text"><%= review.comment%></p>
-            <%= for(i=0; i<=5;i++){ %>
-                <% if (r === 1) { %>
-                    *
-                  <% } else if (r === 2) { %>
-                    **
-                  <% } else if (r === 3) { %>
-                    ***
-                  <% } else if (r === 4) { %>
-                    ****
-                  <% } else if (r === 5) { %>
-                    *****
-                  <% } %>
-                  
-            <p class="card-text"><%= review.rating %>stars</p>
-            <%}%>
+            <p class="card-text"><%= review.rating %>Star's</p>
+            <form method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>">
+                <button class="btn btn-sm btn-dark">Delete</button>
+            </form>
+            
             </div></div>
            <%}%>
 </div>
