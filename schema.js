@@ -12,9 +12,9 @@ image:Joi.string().allow("",null),
 
 });
 
-module.exports.reviewSchema =joi.oblect({
-review:joi.object({
-    rating:Joi.number().required(),
+module.exports.reviewSchema =Joi.object({
+review:Joi.object({
+    rating:Joi.number().required().min(1).max(5),
     comment:Joi.string().required(),
 }).required(),
     

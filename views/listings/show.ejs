@@ -46,6 +46,33 @@
 </div>
 <button class="btn btn-outline-dark mt-3">submit</button>
 </form>
-   </div></div>
-   
+   <hr>
+<div class=" row">
+    <% for(let review of listing.review){%>
+        <div class="card  col-5 ms-3 mb-3 border">
+        <div class="card-body">
+
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text"><%= review.comment%></p>
+            <%= for(i=0; i<=5;i++){ %>
+                <% if (r === 1) { %>
+                    *
+                  <% } else if (r === 2) { %>
+                    **
+                  <% } else if (r === 3) { %>
+                    ***
+                  <% } else if (r === 4) { %>
+                    ****
+                  <% } else if (r === 5) { %>
+                    *****
+                  <% } %>
+                  
+            <p class="card-text"><%= review.rating %>stars</p>
+            <%}%>
+            </div></div>
+           <%}%>
+</div>
+ 
+</div></div>
+
 </body>
