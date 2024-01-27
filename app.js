@@ -7,7 +7,7 @@ const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utility/wrapAsync.js");
 const ExpressError = require("./utility/expressError.js");
 const listings=require("./routes/listing.js");
-const review=require("./routes/review.js");
+const reviews=require("./routes/review.js");
 /*------------------------------------------------------------------------------------*/
 app.set("View engine", "ejs");
 app.set("View", path.join(__dirname, "Views"));
@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use("/listings",listings);
-app.use("/listing/:id/reviews",review);
+app.use("/listings/:id/reviews",reviews);
 /*------------------------------------------------------------------------------------*/
 let mongo_url = "mongodb://127.0.0.1:27017/wonderlust";
 /*---------------------------------------main---------------------------------------------*/

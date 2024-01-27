@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router({mergeParams:true});
 const wrapAsync = require("../utility/wrapAsync.js");
 const ExpressError = require("../utility/expressError.js");
 const { listingSchema,reviewSchema } = require("../schema.js");
