@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use("/listings",listings);
-app.use("/listings/:id/reviews",reviews);
+app.use("/listings/:id/reviews",reviews); 
 /*------------------------------------------------------------------------------------*/
 let mongo_url = "mongodb://127.0.0.1:27017/wonderlust";
 /*---------------------------------------main---------------------------------------------*/
@@ -40,7 +40,7 @@ app.all("*", (req, res, next) => {
   next(new ExpressError(404, "page not found!"));
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   let { statusCode = 500, message = "somthing went wrong" } = err;
   res.render("./listings/error.ejs", { message });
 });
