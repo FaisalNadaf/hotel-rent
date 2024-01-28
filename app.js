@@ -8,6 +8,8 @@ const wrapAsync = require("./utility/wrapAsync.js");
 const ExpressError = require("./utility/expressError.js");
 const listings=require("./routes/listing.js");
 const reviews=require("./routes/review.js");
+const session = require("express-session");
+
 /*------------------------------------------------------------------------------------*/
 app.set("View engine", "ejs");
 app.set("View", path.join(__dirname, "Views"));
@@ -17,6 +19,7 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use("/listings",listings);
 app.use("/listings/:id/reviews",reviews); 
+
 /*------------------------------------------------------------------------------------*/
 let mongo_url = "mongodb://127.0.0.1:27017/wonderlust";
 /*---------------------------------------main---------------------------------------------*/
@@ -31,6 +34,15 @@ main()
 async function main() {
   await mongoose.connect(mongo_url);
 }
+
+/*---------------------------------------express-session---------------------------------------------*/
+app.use(session({
+  secret: 'your-secret-key', // You should replace this with a strong and unique secret key
+  resave: false,
+  saveUninitialized: true // Explicitly set the saveUninitialized option
+}));
+
+
 /*---------------------------------------root route---------------------------------------------*/
 app.get("/", (req, res) => {
   res.send("hello im root");
