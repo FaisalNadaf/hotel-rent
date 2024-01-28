@@ -9,6 +9,8 @@ const ExpressError = require("./utility/expressError.js");
 const listings=require("./routes/listing.js");
 const reviews=require("./routes/review.js");
 const session = require("express-session");
+const flash = require('connect-flash');
+
 
 /*------------------------------------------------------------------------------------*/
 app.set("View engine", "ejs");
@@ -17,8 +19,6 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
-app.use("/listings",listings);
-app.use("/listings/:id/reviews",reviews); 
 
 /*------------------------------------------------------------------------------------*/
 let mongo_url = "mongodb://127.0.0.1:27017/wonderlust";
@@ -39,10 +39,25 @@ async function main() {
 app.use(session({
   secret: 'your-secret-key', // You should replace this with a strong and unique secret key
   resave: false,
-  saveUninitialized: true // Explicitly set the saveUninitialized option
+  saveUninitialized: true, // Explicitly set the saveUninitialized option
+  cookie:{
+     expires:Date.now()+7*24*60*60*1000,
+     maxAge:7*24*60*60*1000,
+     httpOnly:true,
+  },
 }));
 
+app.use(flash());
 
+app.use((req,res,next)=>{
+  res.locals.sucess =req.flash("sucess");
+  res.locals.error =req.flash("error");
+  next();
+});
+
+/*---------------------------------------routes---------------------------------------------*/
+app.use("/listings",listings);
+app.use("/listings/:id/reviews",reviews); 
 /*---------------------------------------root route---------------------------------------------*/
 app.get("/", (req, res) => {
   res.send("hello im root");
