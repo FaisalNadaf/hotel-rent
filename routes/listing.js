@@ -73,7 +73,6 @@ router.post(
       res.render("listings/edit.ejs", { listing });
     })
   );
-  
   /*---------------------------------------update listing router---------------------------------------------*/
   router.put(
     "/:id",
