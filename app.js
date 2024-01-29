@@ -6,10 +6,14 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utility/wrapAsync.js");
 const ExpressError = require("./utility/expressError.js");
-const listings=require("./routes/listing.js");
-const reviews=require("./routes/review.js");
+const listingsRouter=require("./routes/listing.js");
+const reviewsRouter=require("./routes/review.js");
+const userRouter=require("./routes/user.js");
 const session = require("express-session");
 const flash = require('connect-flash');
+const passport=require("passport");
+const LocalStartagi=require("passport-local");
+const User=require("./models/user.js");
 
 
 /*------------------------------------------------------------------------------------*/
@@ -55,17 +59,44 @@ app.use((req,res,next)=>{
   next();
 });
 
+app.get("/demoUser",async(req,res)=>{
+  let fakeUser= new User({
+    email:"faisal@gmail",
+    username:"faisal123",
+  });
 /*---------------------------------------routes---------------------------------------------*/
-app.use("/listings",listings);
-app.use("/listings/:id/reviews",reviews); 
+app.use("/listings",listingsRouter);
+app.use("/listings/:id/reviews",reviewsRouter); 
+app.use("/",userRouter); 
 /*---------------------------------------root route---------------------------------------------*/
 app.get("/", (req, res) => {
   res.send("hello im root");
 });
+
+/*---------------------------------------passport---------------------------------------------*/
+app.use(passport.initialize());
+app.use(passport.session());
+
+// use static authenticate method of model in LocalStrategy
+passport.use(new LocalStartagi(User.authenticate()));
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 /*---------------------------------------ERROR HANDLING---------------------------------------------*/
 app.all("*", (req, res, next) => {
   next(new ExpressError(404, "page not found!"));
 });
+
+
+
+
+let registerUser=await User.register(fakeUser,"12345");
+res.send(registerUser);
+});
+
 
 app.use((err, req, res) => {
   let { statusCode = 500, message = "somthing went wrong" } = err;
