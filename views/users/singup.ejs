@@ -1,0 +1,30 @@
+
+<% layout("listings/layouts/boilerplate") -%>
+<body>
+    <form method="POST" action="/singup" class="needs-validation" novalidate>
+       
+        
+        <div class="row "><div class="col-8 offset-2">
+        <h2>signUp</h2>
+
+       
+       
+        <div class="mb-3">
+            <label for="username" class="form-label">username</label>
+        <input required type="text" name="username" class="form-control"  placeholder="username">
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">email</label>
+        <input required type="email" name="email" class="form-control"  placeholder="email">
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">password</label>
+        <input required type="password" name="password" class="form-control"  placeholder="password">
+        </div>
+
+        <button class="btn btn-success">singUp</button>
+        </div></div>
+    
+    </form></body>
