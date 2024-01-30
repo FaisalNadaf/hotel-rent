@@ -14,6 +14,7 @@ const flash = require('connect-flash');
 const passport=require("passport");
 const LocalStartagi=require("passport-local");
 const User=require("./models/user.js");
+const { Z_ASCII } = require("zlib");
 
 
 /*------------------------------------------------------------------------------------*/
@@ -59,11 +60,14 @@ app.use((req,res,next)=>{
   next();
 });
 
-app.get("/demoUser",async(req,res)=>{
-  let fakeUser= new User({
-    email:"faisal@gmail",
-    username:"faisal123",
-  });
+// app.get("/demoUser", wrapAsync(async(req,res)=>{
+//   let fakeUser= new User({
+//     email:"xys@gamil.com",
+//     username:"isal123",
+//   });
+//   let registerUser=await User.register(fakeUser,"12345");
+// res.send(registerUser);
+// }));
 /*---------------------------------------routes---------------------------------------------*/
 app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter); 
@@ -91,14 +95,7 @@ app.all("*", (req, res, next) => {
 });
 
 
-
-
-let registerUser=await User.register(fakeUser,"12345");
-res.send(registerUser);
-});
-
-
-app.use((err, req, res) => {
+app.use((err, req,res,next) => {
   let { statusCode = 500, message = "somthing went wrong" } = err;
   res.render("./listings/error.ejs", { message });
 });
@@ -106,3 +103,5 @@ app.use((err, req, res) => {
 app.listen(8080, () => {
   console.log("server started on port 8080");
 });
+
+
