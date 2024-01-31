@@ -80,14 +80,13 @@ app.get("/", (req, res) => {
 /*---------------------------------------passport---------------------------------------------*/
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(passport.authenticate());
 
 // use static authenticate method of model in LocalStrategy
 passport.use(new LocalStartagi(User.authenticate()));
 
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.deserializeUser(User.deserializeUser()); 
 
 
 /*---------------------------------------ERROR HANDLING---------------------------------------------*/

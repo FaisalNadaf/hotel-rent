@@ -3,6 +3,7 @@ const router = express.Router();
 const user = require("../models/user");
 const wrapAsync = require("../utility/wrapAsync");
 const passport = require("passport");
+const { redirecyUrl } = require("../middleware");
 
 router.get("/singup", (req, res) => {
   res.render("users/singup.ejs");
@@ -15,9 +16,12 @@ router.post(
       let { username, email, password } = req.body;
       const newuser = new user({ username, email });
       let registerUser = await user.register(newuser, password);
-      console.log(registerUser);
-      req.flash("sucess", "welcome to wonder lust");
-      res.redirect("/listings");
+      req.login(registerUser, function(err) {
+        if (err) { return next(err); }
+        req.flash("sucess", "welcome to wonder lust");
+        res.redirect("/listings");
+      });
+   
     } catch (e) {
       req.flash("error", e.message);
       res.redirect("/singup");
@@ -29,11 +33,12 @@ router.get("/login", (req, res) => {
   });
 
 router.post(
-  "/login",
+  "/login",redirecyUrl,
   passport.authenticate("local",{ failureRedirect:"/login", failureFlash: true }),
   async (req, res) => {
-    req.flash("sucess","welcom to wonder lust")
-    res.redirect("/listings");
+    req.flash("sucess","welcom back to wonder lust")
+    let redurl=res.locals.redirecyUrl || "/listings";
+    res.redirect(redurl);
   }
 );
 
