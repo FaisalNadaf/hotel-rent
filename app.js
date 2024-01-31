@@ -56,6 +56,7 @@ app.use(flash());
 app.use((req,res,next)=>{
   res.locals.sucess =req.flash("sucess");
   res.locals.error =req.flash("error");
+  res.locals.currentuser =req.user;
   next();
 });
 
@@ -79,6 +80,7 @@ app.get("/", (req, res) => {
 /*---------------------------------------passport---------------------------------------------*/
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.authenticate());
 
 // use static authenticate method of model in LocalStrategy
 passport.use(new LocalStartagi(User.authenticate()));

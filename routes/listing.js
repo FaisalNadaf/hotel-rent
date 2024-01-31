@@ -50,8 +50,8 @@ router.get(
   
 /*---------------------------------------create new listing router---------------------------------------------*/
 router.post(
-    "/",
-    validateListing,isLogedIn,
+    "/",isLogedIn,
+    validateListing,
     wrapAsync(async (req, res, next) => {
       const newListing = new listing(req.body.listing);
       await newListing.save();
@@ -76,8 +76,8 @@ router.post(
   );
   /*---------------------------------------update listing router---------------------------------------------*/
   router.put(
-    "/:id",
-    validateListing,isLogedIn,
+    "/:id",isLogedIn,
+    validateListing,
     wrapAsync(async (req, res) => {
       let { id } = req.params;
       await Listing.findByIdAndUpdate(id, { ...req.body.listing });
