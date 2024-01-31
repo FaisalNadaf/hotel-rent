@@ -51,7 +51,7 @@ router.get(
 /*---------------------------------------create new listing router---------------------------------------------*/
 router.post(
     "/",
-    validateListing,
+    validateListing,isLogedIn,
     wrapAsync(async (req, res, next) => {
       const newListing = new listing(req.body.listing);
       await newListing.save();
@@ -62,7 +62,7 @@ router.post(
   
   /*---------------------------------------edit listing router---------------------------------------------*/
   router.get(
-    "/:id/edit",
+    "/:id/edit",isLogedIn,
     wrapAsync(async (req, res) => {
       let { id } = req.params;
       const listing = await Listing.findById(id);
@@ -77,7 +77,7 @@ router.post(
   /*---------------------------------------update listing router---------------------------------------------*/
   router.put(
     "/:id",
-    validateListing,
+    validateListing,isLogedIn,
     wrapAsync(async (req, res) => {
       let { id } = req.params;
       await Listing.findByIdAndUpdate(id, { ...req.body.listing });
@@ -89,7 +89,7 @@ router.post(
   
   /*---------------------------------------delete listing router---------------------------------------------*/
   router.delete(
-    "/:id",
+    "/:id",isLogedIn,
     wrapAsync(async (req, res) => {
       let { id } = req.params;
       let deletedListing = await Listing.findByIdAndDelete(id);

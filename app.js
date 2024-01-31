@@ -12,7 +12,7 @@ const userRouter=require("./routes/user.js");
 const session = require("express-session");
 const flash = require('connect-flash');
 const passport=require("passport");
-const LocalStartagi=require("passport-local");
+const LocalStartagi=require("passport-local").Strategy;
 const User=require("./models/user.js");
 
 
