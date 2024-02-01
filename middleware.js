@@ -3,6 +3,7 @@ const ExpressError = require("./utility/expressError.js");
 const { listingSchema,reviewSchema } = require("./schema.js");
 const listing = require("./models/listing.js");
 const Listing = require("./models/listing.js");
+const review = require("./models/review.js");
 
 
 
@@ -54,3 +55,13 @@ module.exports.validateListing = (req, res, next) => {
       next();
     }
   };    
+
+  module.exports.isReviewAauthor= async(req,res,next)=>{
+    let { id ,reviewId} = req.params;
+      await review.findByIdAndUpdate(reviewId);
+      if(!req.locals.currentuser && review.author._id.equals(req.locals.currentuser._id)){
+        req.flash("error","NO-OWNER_SHIP");
+        return res.redirect(`/listings/${id}`);
+      }
+      next();
+}

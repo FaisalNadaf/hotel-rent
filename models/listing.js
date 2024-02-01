@@ -15,11 +15,11 @@ const listingSchema =new Schema ({
     country:String,
   review:[
     {
-    type:Schema.Types.ObjectId,
+    type:mongoose.Schema.Types.ObjectId,
     ref:"review",
   },],
    owner:{
-    type:Schema.Types.ObjectId,
+    type:mongoose.Schema.Types.ObjectId,
     ref:"User",
   },
    
