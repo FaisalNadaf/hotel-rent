@@ -11,6 +11,7 @@
     
         <div class="card-body">
           <p class="card-text">
+            <p><%= listing.owner.username %></p>
             <p><%= listing.description %></p>
             <p>&#8377; <%= listing.price.toLocaleString("en-IN") %> / night</p>
             <p><%= listing.location %></p>

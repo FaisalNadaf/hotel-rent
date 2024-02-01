@@ -87,7 +87,7 @@ passport.use(new LocalStartagi(User.authenticate()));
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser()); 
-
+      
 
 /*---------------------------------------ERROR HANDLING---------------------------------------------*/
 app.all("*", (req, res, next) => {
