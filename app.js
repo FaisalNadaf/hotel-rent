@@ -57,6 +57,7 @@ app.use((req,res,next)=>{
   res.locals.sucess =req.flash("sucess");
   res.locals.error =req.flash("error");
   res.locals.currentuser =req.user;
+  console.log(req.user);
   next();
 });
 
@@ -85,8 +86,14 @@ app.use(passport.session());
 passport.use(new LocalStartagi(User.authenticate()));
 
 // use static serialize and deserialize of model for passport session support
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser()); 
+passport.serializeUser( function(user, done) {
+  done(null, user.id);
+},User.serializeUser());
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+},User.deserializeUser()); 
       
 
 /*---------------------------------------ERROR HANDLING---------------------------------------------*/

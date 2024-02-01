@@ -11,7 +11,7 @@
     
         <div class="card-body">
           <p class="card-text">
-            <p><%= listing.owner.username %></p>
+            <!-- <p><%= listing.owner.username %></p> -->
             <p><%= listing.description %></p>
             <p>&#8377; <%= listing.price.toLocaleString("en-IN") %> / night</p>
             <p><%= listing.location %></p>
@@ -19,7 +19,7 @@
           </p>
         </div>
   
-
+<% if(currentuser && currentuser._id.equals(listing.owner._id)){%>
     <div class="btns">
         <a href="/listings/<%= listing._id %>/edit ">
             <button class="btn btn-dark add-btn">
@@ -33,6 +33,7 @@
         </button>
     </form>
 </div>
+<%}%>
 <hr>
 <h4 class="mt-3">leave a review</h4>
 

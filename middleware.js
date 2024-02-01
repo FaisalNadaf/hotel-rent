@@ -1,4 +1,4 @@
-module.exports.isLogedIn=(req,res,next)=>{
+module.exports.isLoggedIn=(req,res,next)=>{
     if(!req.isAuthenticated){
         req.session.redirecyUrl=req.originalUrl;
        req.flash("error","you are not logined");

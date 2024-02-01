@@ -5,7 +5,7 @@ const ExpressError = require("../utility/expressError.js");
 const { listingSchema,reviewSchema } = require("../schema.js");
 const listing = require("../models/listing.js");
 const Listing = require("../models/listing.js");
-//const { isLogedIn} = require("../middleware.js");
+const { isLoggedIn} = require("../middleware.js");
 
 
 
@@ -31,7 +31,7 @@ router.get(
   );
   
   /*---------------------------------------new router---------------------------------------------*/
-  router.get("/new",   (req, res) => {
+  router.get("/new", isLoggedIn,  (req, res) => {
     res.render("listings/new.ejs");
   });
   /*---------------------------------------show router---------------------------------------------*/
@@ -50,7 +50,7 @@ router.get(
   
 /*---------------------------------------create new listing router---------------------------------------------*/
 router.post(
-    "/",  
+    "/",  isLoggedIn,
     validateListing,
     wrapAsync(async (req, res, next) => {
       const newListing = new listing(req.body.listing);
@@ -64,7 +64,7 @@ router.post(
   
   /*---------------------------------------edit listing router---------------------------------------------*/
   router.get(
-    "/:id/edit",  
+    "/:id/edit",  isLoggedIn,
     wrapAsync(async (req, res) => {
       let { id } = req.params;
       const listing = await Listing.findById(id);
@@ -79,7 +79,7 @@ router.post(
   /*---------------------------------------update listing router---------------------------------------------*/
   router.put(
     "/:id",  
-    validateListing,
+    validateListing,isLoggedIn,
     wrapAsync(async (req, res) =>{
       let { id } = req.params;
       await Listing.findByIdAndUpdate(id, { ...req.body.listing });
