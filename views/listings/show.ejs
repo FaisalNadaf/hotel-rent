@@ -11,15 +11,15 @@
     
         <div class="card-body">
           <p class="card-text">
-            <!-- <p><%= listing.owner.username %></p> -->
+            <p><%= listing.owner.username %></p>
             <p><%= listing.description %></p>
             <p>&#8377; <%= listing.price.toLocaleString("en-IN") %> / night</p>
             <p><%= listing.location %></p>
             <p><%= listing.country %></p>
           </p>
         </div>
-  
 <% if(currentuser && currentuser._id.equals(listing.owner._id)){%>
+
     <div class="btns">
         <a href="/listings/<%= listing._id %>/edit ">
             <button class="btn btn-dark add-btn">
@@ -35,6 +35,7 @@
 </div>
 <%}%>
 <hr>
+<% if(!currentuser){%>
 <h4 class="mt-3">leave a review</h4>
 
 <form class="needs-validation" method="POST" action="/listings/<%= listing._id %>/reviews" novalidate  >
@@ -48,6 +49,7 @@
 </div>
 <button class="btn btn-outline-dark mt-3">submit</button>
 </form>
+<%}%>
    <hr>
 <div class=" row">
     <% for(let review of listing.review){%>

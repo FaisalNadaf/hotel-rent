@@ -44,7 +44,7 @@ router.post(
      res.redirect(redurl);
       // res.redirect("/listings")
   }
-);
+)
 
 router.get("/logout",(req,res,next)=>{
   req.logOut;

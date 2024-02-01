@@ -51,14 +51,13 @@ app.use(session({
   },
 }));
 
-app.use(flash());
+app.use(flash()); 
 
 app.use((req,res,next)=>{
   res.locals.sucess =req.flash("sucess");
   res.locals.error =req.flash("error");
   res.locals.currentuser =req.user;
-  console.log(req.user);
-  next();
+  next(); 
 });
 
 // app.get("/demoUser", wrapAsync(async(req,res)=>{
@@ -72,7 +71,7 @@ app.use((req,res,next)=>{
 /*---------------------------------------routes---------------------------------------------*/
 app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter); 
-app.use("/",userRouter); 
+app.use("/",userRouter);  
 /*---------------------------------------root route---------------------------------------------*/
 app.get("/", (req, res) => {
   res.send("hello im root");
