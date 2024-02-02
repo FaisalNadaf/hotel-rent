@@ -9,26 +9,39 @@ const { isOwner } = require("../middleware.js");
 const review = require("../models/review.js");
 const listingControler= require("../controler/listing.js");
 
-/*---------------------------------------index route---------------------------------------------*/
-router.get(
-  "/",
+/*---------------------------------------  /  ---------------------------------------------*/
+router.route("/")
+.get(
+
   wrapAsync(listingControler.indexListing)
-);
+)
+.post(
 
-/*---------------------------------------new router---------------------------------------------*/
-router.get("/new", isLoggedIn,listingControler.newListing);
-/*---------------------------------------show router---------------------------------------------*/
-router.get(
-  "/:id",
-  wrapAsync(listingControler.showListing)
-);
-
-/*---------------------------------------create new listing router---------------------------------------------*/
-router.post(
-  "/",
   isLoggedIn,
   validateListing,
   wrapAsync(listingControler.createListing)
+);
+
+
+/*---------------------------------------new router---------------------------------------------*/
+router.get("/new", isLoggedIn,listingControler.newListing);
+
+/*--------------------------------------- /:id  ---------------------------------------------*/
+router.route("/:id")
+.get(
+ 
+  wrapAsync(listingControler.showListing)
+)
+.put(
+
+  validateListing,
+  isLoggedIn,
+  wrapAsync(listingControler.updateListing)
+)
+.delete(
+ 
+  isOwner,
+  wrapAsync(listingControler.destroyListing)
 );
 
 /*---------------------------------------edit listing router---------------------------------------------*/
@@ -37,20 +50,5 @@ router.get(
   isLoggedIn,
   wrapAsync(listingControler.editListing)
 );
-/*---------------------------------------update listing router---------------------------------------------*/
-router.put(
-  "/:id",
-  validateListing,
-  isLoggedIn,
-  wrapAsync(listingControler.updateListing)
-);
-
-/*---------------------------------------delete listing router---------------------------------------------*/
-router.delete(
-  "/:id",
-  isOwner,
-  wrapAsync(listingControler.destroyListing)
-);
-
 /*---------------------------------------exports---------------------------------------------*/
 module.exports = router;
