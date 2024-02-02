@@ -16,6 +16,7 @@ const LocalStartagi=require("passport-local").Strategy;
 const User=require("./models/user.js");  
 
 
+
 /*------------------------------------------------------------------------------------*/
 app.set("View engine", "ejs");
 app.set("View", path.join(__dirname, "Views"));
