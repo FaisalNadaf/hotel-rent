@@ -1,7 +1,7 @@
 
 <% layout("listings/layouts/boilerplate") -%>
 <body>
-    <form method="POST" action="/listings" class="needs-validation" novalidate>
+    <form method="POST" action="/listings" class="needs-validation" novalidate enctype="multipart/form-data"> 
        
         
         <div class="row "><div class="col-8 offset-2">
@@ -19,10 +19,11 @@
         <textarea required name="listing[description]" class="form-control"  placeholder="description"></textarea>
         </div>
 
-        <div class="mb-3">
+     <div class="mb-3">
         <label for="image" class="form-label">image</label>  
-     <input  type="text" name="listing[image]" class="form-control"  placeholder="url link">
+     <input  type="file" name="listing[image]" class="form-control"  placeholder="upload file">
      </div>
+
 <div class="row">
         <div class="mb-3 col-md-4">
         <label for="price" class="form-label">price</label>

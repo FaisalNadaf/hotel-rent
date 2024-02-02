@@ -17,14 +17,16 @@ router.route("/")
 )
 .post(
 
-  isLoggedIn,
+  // isLoggedIn,
   validateListing,
   wrapAsync(listingControler.createListing)
 );
 
 
 /*---------------------------------------new router---------------------------------------------*/
-router.get("/new", isLoggedIn,listingControler.newListing);
+router.get("/new", 
+//  isLoggedIn,
+ listingControler.newListing);
 
 /*--------------------------------------- /:id  ---------------------------------------------*/
 router.route("/:id")
@@ -35,19 +37,19 @@ router.route("/:id")
 .put(
 
   validateListing,
-  isLoggedIn,
+  // isLoggedIn,
   wrapAsync(listingControler.updateListing)
 )
 .delete(
  
-  isOwner,
+  // isOwner,
   wrapAsync(listingControler.destroyListing)
 );
 
 /*---------------------------------------edit listing router---------------------------------------------*/
 router.get(
   "/:id/edit",
-  isLoggedIn,
+  // isLoggedIn,
   wrapAsync(listingControler.editListing)
 );
 /*---------------------------------------exports---------------------------------------------*/

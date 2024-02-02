@@ -10,10 +10,13 @@ const reviewControler = require("../controler/review.js");
 
   
 /*---------------------------------------reviwe post route---------------------------------------------*/
-router.post("/",validateReview, reviewControler.createReview);
+router.post("/",validateReview, 
+reviewControler.createReview);
   
   /*---------------------------------------reviwe delete route---------------------------------------------*/
-  router.delete("/:reviewId",isReviewAauthor,wrapAsync(reviewControler.destroyReview));
+  router.delete("/:reviewId",
+  // isReviewAauthor,
+  wrapAsync(reviewControler.destroyReview));
   
   
   /*---------------------------------------exports---------------------------------------------*/
