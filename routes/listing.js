@@ -1,31 +1,27 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const wrapAsync = require("../utility/wrapAsync.js");
-
 const { isLoggedIn } = require("../middleware.js");
 const { validateListing } = require("../middleware.js");
-
 const { isOwner } = require("../middleware.js");
 const review = require("../models/review.js");
 const listingControler= require("../controler/listing.js");
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const multer  = require('multer');
+const { storage } = require("../cloudnary.js");
+const upload = multer({ storage });
 
 /*---------------------------------------  /  ---------------------------------------------*/
 router.route("/")
 .get(
-
   wrapAsync(listingControler.indexListing)
 )
-// .post(
-//   // isLoggedIn,
-//   validateListing,
-//   wrapAsync(listingControler.createListing)
-// );
-.post(upload.single("listing[image]"),(req,res)=>{
-  res.send(req.file);
-  console.log(req.file);
-});
+.post(
+  // isLoggedIn,
+  upload.single("listing[image]"),
+  validateListing,
+  wrapAsync(listingControler.createListing)
+);
+
 
 
 /*---------------------------------------new router---------------------------------------------*/
