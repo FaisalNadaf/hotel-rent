@@ -22,8 +22,9 @@ router.route("/")
 //   validateListing,
 //   wrapAsync(listingControler.createListing)
 // );
-.post( upload.single("listing[Image]"),(req,res)=>{
+.post(upload.single("listing[image]"),(req,res)=>{
   res.send(req.file);
+  console.log(req.file);
 });
 
 
