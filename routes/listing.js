@@ -37,8 +37,9 @@ router.route("/:id")
 )
 .put(
 
-  validateListing,
-  // isLoggedIn,
+  // validateListing,
+  // isLoggedIn, 
+  upload.single("listing[image]"),
   wrapAsync(listingControler.updateListing)
 )
 .delete(

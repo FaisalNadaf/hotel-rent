@@ -1,9 +1,10 @@
 
 <% layout("listings/layouts/boilerplate") -%>
 <body>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation" novalidate>
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation" novalidate enctype="multipart/form-data">
         <br><br>
-        <div class="row "><div class="col-8 offset-2">
+        <div class="row ">
+            <div class="col-8 offset-2">
         <h3>edit your listing</h3>
 
         <div class="mb-3">
@@ -16,10 +17,13 @@
         <textarea required class="form-control" name="listing[description]" ><%= listing.description %></textarea>
         </div>
 
-    
+        <div class="card col-6 offset-3">
+            <img src="<%= originalImg %>"  class="card-img-top show-img" >
+        </div>
+        
         <div class="mb-3">
             <label for="image" class="form-label">image</label>
-            <input required type="text"  class="form-control" name="listing[image]" value="<%= listing.image %>">
+            <input  type="file"  class="form-control" name="listing[image]" value="<%= listing.image.url %>">
            </div>
 <div class="row">
         <div class="mb-3 col-md-4">

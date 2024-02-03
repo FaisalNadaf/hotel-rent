@@ -1,5 +1,8 @@
 
 <% layout("listings/layouts/boilerplate") -%>
+<script>
+    const maptoken="<%= process.env.MAP_ACESS %>";
+</script>
 <body>
     <div class="row ">
         <div class="col-8 offset-3">
@@ -18,7 +21,6 @@
             <p><%= listing.country %></p>
           </p>
         </div>
-<% if(currentuser && currentuser._id.equals(listing.owner._id)){%>
 
     <div class="btns">
         <a href="/listings/<%= listing._id %>/edit ">
@@ -33,16 +35,11 @@
         </button>
     </form>
 </div>
-<%}%>
 <hr>
 <% if(!currentuser){%>
 <h4 class="mt-3">leave a review</h4>
 
 <form class="needs-validation" method="POST" action="/listings/<%= listing._id %>/reviews" novalidate  >
-<!-- <div>
- 
-    <input class="form-range mt-3" type="range"  min="1" max="5" name="review[rating]" id="rating">
-</div> -->
 <label class="form-label" for="rating">range</label>
 <fieldset class="starability-slot">
     <legend>First rating:</legend>
@@ -75,20 +72,22 @@
             <h5 class="card-title">Card title</h5>
             <p class="card-text"><%= review.author %></p>
             <p class="starability-result" data-rating="<%= review.rating %>">
-                Rated: 3 stars
+
               </p>
             <p class="card-text"><%= review.comment%></p>
-            <!-- <p class="card-text"><%= review.rating %>Star's</p> -->
             <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
                 <button class="btn btn-sm btn-dark">Delete</button>
             </form>
             
             </div></div>
+            <hr>
            <%}%>
 </div>
- 
-</div></div>
+<div id="map"></div></div>
+</div>
 
+
+<script src="/public/js/map.js"></script>
 </body>
 
 
