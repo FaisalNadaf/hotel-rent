@@ -77,9 +77,9 @@ app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter); 
 app.use("/",userRouter);  
 /*---------------------------------------root route---------------------------------------------*/
-app.get("/", (req, res) => {
-  res.send("hello im root");
-});
+// app.get("/", (req, res) => {
+//   res.send("hello im root");
+// });
 
 /*---------------------------------------passport---------------------------------------------*/
 app.use(passport.initialize());

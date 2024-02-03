@@ -1,8 +1,6 @@
 
 <% layout("listings/layouts/boilerplate") -%>
-<script>
-    const maptoken="<%= process.env.MAP_ACESS %>";
-</script>
+
 <body>
     <div class="row ">
         <div class="col-8 offset-3">
@@ -87,7 +85,17 @@
 </div>
 
 
-<script src="/public/js/map.js"></script>
+<script>
+    let maptoken="<%= process.env.MAP_ACESS %>";
+    console.log(maptoken);
+    maptilersdk.config.apiKey = maptoken;
+    const map = new maptilersdk.Map({
+      container: 'map', // container's id or the HTML element in which the SDK will render the map
+      style: maptilersdk.MapStyle.STREETS,
+      center: [ 74.498703,15.852792], // starting position [lng, lat]
+      zoom: 10 // starting zoom
+    });
+  </script>
 </body>
 
 

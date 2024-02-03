@@ -1,9 +1,50 @@
 <% layout("listings/layouts/boilerplate") -%>
 
+sty
+
 <body>
     <form method="GET" action="/listings/new">
+      <div id="filters">
+        <div class="filter">
+          <div><i class="fa-solid fa-arrow-trend-up"></i></div>
+          <p>castel</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-brands fa-fort-awesome"></i></div>
+          <p>castel</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-mountain-city"></i></div>
+          <p>castel</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-igloo"></i></div>
+          <p>castel</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-cow"></i></div>
+          <p>castel</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-person-swimming"></i></div>
+          <p>castel</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-umbrella-beach"></i></div>
+          <p>castel</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-snowman"></i></div>
+          <p>castel</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-water"></i></div>
+          <p>castel</p>
+        </div>
+      </div>
     </form>
         <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+    
     <% for(let listing of allListing){%>
       <a href="/listings/<%= listing._id %>">
         <div class="card col" >
