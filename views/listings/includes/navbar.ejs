@@ -1,3 +1,25 @@
+
+<style>
+  .searchbtn{
+    background-color: #FF385C;
+    color: white;
+    border-radius: 10px;
+    transition: all 0.5s;
+
+  }
+  .searchbtn:hover{
+    background-color: #FF385C;
+    color: white;
+    border-radius:25px;
+padding:0rem 1rem;
+
+  }
+  .searcrhbar:hover{
+    border:1px solid #FF385C;
+  }
+</style>
+
+
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top" >
     <div class="container-fluid">
       <a class="navbar-brand" href="/listings"><i class="fa-solid fa-house"></i></a>
@@ -8,6 +30,11 @@
         <div class="navbar-nav">
           <a class="nav-link" href="/listings">ALL LISTINGS</a>
         </div>
+
+        <form class="d-flex ms-auto " role="search">
+          <input class="form-control me-2 searcrhbar"  type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline searchbtn" type="submit">Search</button>
+        </form>
 
         <div class="navbar-nav ms-auto">
           <a class="nav-link" href="/listings/new">ADD LISTING</a>

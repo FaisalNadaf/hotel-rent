@@ -1,6 +1,33 @@
 <% layout("listings/layouts/boilerplate") -%>
 
-sty
+<style>
+  #filters{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 5rem;
+    align-items: center;
+  }
+  .filter{
+    font-size: 0.8re;
+    text-align: center;
+    margin-right: 2rem;
+    opacity: 0.6;
+  }
+  .filter:hover{
+    opacity: 1;
+  }
+  .tax-switch{
+    border: 1px solid black ;
+    margin-left: 2rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  }
+  .taxonrent{
+    display: none;
+  }
+</style>
 
 <body>
     <form method="GET" action="/listings/new">
@@ -41,6 +68,27 @@ sty
           <div><i class="fa-solid fa-water"></i></div>
           <p>castel</p>
         </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-mountain-city"></i></div>
+          <p>castel</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-igloo"></i></div>
+          <p>castel</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-cow"></i></div>
+          <p>castel</p>
+        </div>
+   
+
+        
+    <div class="tax-switch">
+    <div class="form-check form-switch form-check-reverse">
+      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+      <label class="form-check-label" for="flexSwitchCheckDefault">along-with-TAX</label>
+    </div>
+  </div>
       </div>
     </form>
         <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
@@ -53,11 +101,24 @@ sty
             <div class="card-body">
               <p class="card-text">
                 <b> <p><%= listing.title %></p></b>
-                <p>&#8377; <%= listing.price %> / night</p>
+                <p>&#8377; <%= listing.price %> / night  <i class="taxonrent">&NonBreakingSpace; &NonBreakingSpace; +18% GST</i></p>
               </p>
             </div>
           </div>
           </a>
         <%}%>
     </div>
+    <script>
+      let taxbtn=document.getElementById("flexSwitchCheckDefault");
+         taxbtn.addEventListener("click",()=>{
+          let taxinfo=document.getElementsByClassName("taxonrent");
+          for(tax of taxinfo){
+            if(tax.style.display != "inline"){
+              tax.style.display = "inline";
+            }else{
+              tax.style.display = "none";
+            }
+          }
+         });
+    </script>
 </body>
