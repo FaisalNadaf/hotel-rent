@@ -20,6 +20,8 @@ const User=require("./models/user.js");
 
 
 
+
+
 /*------------------------------------------------------------------------------------*/
 app.set("View engine", "ejs");
 app.set("View", path.join(__dirname, "Views"));
@@ -93,10 +95,25 @@ passport.serializeUser( function(user, done) {
   done(null, user.id);
 },User.serializeUser());
 passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+   User.findById(id, function(err, user) {
     done(err, user);
   });
 },User.deserializeUser()); 
+
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id).exec();
+    done(null, user.id);
+  } catch (err) {
+    done(err, null);
+  }
+});
+
       
 
 /*---------------------------------------ERROR HANDLING---------------------------------------------*/
@@ -105,9 +122,10 @@ app.all("*", (req, res, next) => {
 });
 
 
+
 app.use((err, req,res,next) => {
   let { statusCode = 500, message = "somthing went wrong" } = err;
-  res.render("./listings/error.ejs", { message });
+  res.render("./listings/error.ejs", { statusCode,message });
 });
 /*---------------------------------------port---------------------------------------------*/
 app.listen(8080, () => {

@@ -23,13 +23,16 @@ module.exports.signup=async (req, res) => {
   }
 /*------------------------------------------------------------------------------------*/
 
-module.exports.login=
-passport.authenticate("local",{ failureRedirect:"/login", failureFlash: true }),
+module.exports.login = passport.authenticate("local", {
+  failureRedirect: "/login",
+  failureFlash: true
+}),
 async (req, res) => {
-  req.flash("sucess","welcom back to wonder lust")
-  let redurl=res.locals.redirecyUrl || "/listings";
-   res.redirect(redurl);
-    // res.redirect("/listings")
+  req.flash("sucess", "welcome back to wonder lust");
+  let redurl = res.locals.redirecyUrl || "/listings";
+  res.redirect(redurl);
+  // res.redirect("/listings")
 }
+
 
 /*------------------------------------------------------------------------------------*/
