@@ -15,7 +15,7 @@ reviewControler.createReview);
   
   /*---------------------------------------reviwe delete route---------------------------------------------*/
   router.delete("/:reviewId",
-  // isReviewAauthor,
+  isReviewAauthor,
   wrapAsync(reviewControler.destroyReview));
   
   

@@ -18,6 +18,7 @@ const reviewSchema =new Schema ({
     },
  author:{
     type:mongoose.Schema.Types.ObjectId,
+
     ref:"User",
  }
 });

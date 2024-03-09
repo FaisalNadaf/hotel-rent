@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const Schema =mongoose.Schema;
 const review =require("./review.js");
-const { string } = require("joi");
+
+const { string, date, number } = require("joi");
 
 const listingSchema =new Schema ({
     title:String,
@@ -34,4 +35,5 @@ if(listing){
 
 
 const listing= mongoose.model("listing",listingSchema);
+
 module.exports=listing;

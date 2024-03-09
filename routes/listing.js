@@ -16,7 +16,7 @@ router.route("/")
   wrapAsync(listingControler.indexListing)
 )
 .post(
-  // isLoggedIn,
+  isLoggedIn,
   upload.single("listing[image]"),
   validateListing,
   wrapAsync(listingControler.createListing)
@@ -26,7 +26,7 @@ router.route("/")
 
 /*---------------------------------------new router---------------------------------------------*/
 router.get("/new", 
-//  isLoggedIn,
+ isLoggedIn,
  listingControler.newListing);
 
 /*--------------------------------------- /:id  ---------------------------------------------*/
@@ -37,21 +37,20 @@ router.route("/:id")
 )
 .put(
 
-  // validateListing,
-  // isLoggedIn, 
+  validateListing,
+  isLoggedIn, 
   upload.single("listing[image]"),
   wrapAsync(listingControler.updateListing)
 )
 .delete(
- 
-  // isOwner,
+  isOwner,
   wrapAsync(listingControler.destroyListing)
 );
 
 /*---------------------------------------edit listing router---------------------------------------------*/
 router.get(
   "/:id/edit",
-  // isLoggedIn,
+  isLoggedIn,
   wrapAsync(listingControler.editListing)
 );
 /*---------------------------------------exports---------------------------------------------*/

@@ -1,52 +1,54 @@
-
 <style>
-  .searchbtn{
-    background-color: #FF385C;
+  .searchbtn {
+    background-color: #ff385c;
     color: white;
     border-radius: 10px;
     transition: all 0.5s;
-
   }
-  .searchbtn:hover{
-    background-color: #FF385C;
+  .searchbtn:hover {
+    background-color: #ff385c;
     color: white;
-    border-radius:25px;
-padding:0rem 1rem;
-
+    border-radius: 25px;
+    padding: 0rem 1rem;
   }
-  .searcrhbar:hover{
-    border:1px solid #FF385C;
+  .searcrhbar:hover {
+    border: 1px solid #ff385c;
   }
 </style>
 
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"
+      ><i class="fa-solid fa-house"></i
+    ></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">ALL LISTINGS</a>
+      </div>
 
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top" >
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/listings"><i class="fa-solid fa-house"></i></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link" href="/listings">ALL LISTINGS</a>
-        </div>
+      <form class="d-flex ms-auto" role="search">
+        <input
+          class="form-control me-2 searcrhbar"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline searchbtn" type="submit">Search</button>
+      </form>
 
-        <form class="d-flex ms-auto " role="search">
-          <input class="form-control me-2 searcrhbar"  type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline searchbtn" type="submit">Search</button>
-        </form>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">ADD LISTING</a>
 
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="/listings/new">ADD LISTING</a>
-
-          <% if(!currentuser) { %>
-          <a class="nav-link" href="/singup"><b>SIGN-UP</b></a>
-          <a class="nav-link" href="/login"><b>LOG-IN</b></a>
-          <% } %>
-          <% if(!currentuser) { %>
-          <a class="nav-link" href="/logout"><b>LOG-OUT</b></a>
-          <%}  %>
-        </div>
+        <% if(!currentuser) { %>
+        <a class="nav-link" href="/singup"><b>SIGN-UP</b></a>
+        <a class="nav-link" href="/login"><b>LOG-IN</b></a>
+        <% } %> <% if(!currentuser) { %>
+        <a class="nav-link" href="/logout"><b>LOG-OUT</b></a>
+        <%} %>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
