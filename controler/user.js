@@ -50,7 +50,7 @@ module.exports.signup = async (req, res, next) => {
       }
     });
 
-    req.flash("success", "Welcome to Wonder Lust");
+    req.flash("sucess", "Welcome to Wonder Lust");
     res.redirect("/listings");
   } catch (e) {
     req.flash("error", e.message);
@@ -59,14 +59,34 @@ module.exports.signup = async (req, res, next) => {
   }
 };
 
+// module.exports.login = (req, res, next) => {
+//   passport.authenticate("local", {
+//     failureRedirect: "/login",
+//     failureFlash: true,
+//   })(req, res, () => {
+//     req.flash("sucess", "Welcome back to Wonder Lust");
+//     let redirectUrl = res.locals.redirectUrl || "/listings";
+//     res.redirect(redirectUrl);
+//   });
+// };
+
 module.exports.login = (req, res, next) => {
-  passport.authenticate("local", {
-    failureRedirect: "/login",
-    failureFlash: true,
-  })(req, res, () => {
-   console.log(res.req.user);
-    req.flash("success", "Welcome back to Wonder Lust");
-    let redirectUrl = res.locals.redirectUrl || "/listings";
-    res.redirect(redirectUrl);
-  });
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      req.flash("error", info.message);
+      return res.redirect("/login");
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      req.flash("sucess", "Welcome back to Wonder Lust");
+      let redirectUrl = res.locals.redirectUrl || "/listings";
+      res.redirect(redirectUrl);
+    });
+  })(req, res, next);
 };
+

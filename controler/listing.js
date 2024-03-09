@@ -11,12 +11,14 @@ module.exports.showListing = async (req, res) => {
     req.flash("error", "listing does not exsisit");
     res.redirect("/listings");
   }
+  console.log(listing);
   res.render("listings/show.ejs", { listing });
 };
 
 /*----------------------------------index--------------------------------------------------*/
 module.exports.indexListing = async (req, res) => {
   const allListing = await listing.find({});
+
   res.render("listings/index.ejs", { allListing });
 };
 /*----------------------------------new listing--------------------------------------------------*/

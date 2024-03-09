@@ -22,10 +22,30 @@ router
 
 /*----------------------------------logout--------------------------------------------------*/
 
+// router.get("/logout", (req, res, next) => {
+//   try {
+//     req.logOut();
+//     req.flash("error", "you are logged out!");
+//     res.redirect("/listings");
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
 router.get("/logout", (req, res, next) => {
-  req.logOut;
-  req.flash("error", "you are logged out!");
-  res.redirect("/listings");
+  try {
+    req.logOut((err) => {
+      if (err) {
+        console.error(err);
+        return next(err);
+      }
+      req.flash("error", "You are logged out!");
+      res.redirect("/listings");
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
 });
 
 /*------------------------------------------------------------------------------------*/

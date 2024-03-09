@@ -35,10 +35,10 @@ module.exports.isOwner = async (req, res, next) => {
       return res.redirect("/listings"); // Redirect to listings page or handle accordingly
     }
     // Check if there's a logged-in user and if the user owns the listing
-    console.log("current : ", res.locals.currentuser);
+    console.log("current : ", res.locals.currUser);
     if (
-      !res.locals.currentuser &&
-      listing.owner._id.equals(res.locals.currentuser._id)
+      !res.locals.currUser &&
+      listing.owner.equals(res.locals.currUser._id)
     ) {
       req.flash("error", "You don't have ownership of this listing");
       return res.redirect(`/listings/${id}`);
@@ -81,8 +81,8 @@ module.exports.isReviewAauthor = async (req, res, next) => {
   await review.findByIdAndUpdate(reviewId);
   console.log(review.author);
   if (
-    !res.locals.currentuser &&
-    review.author._id.equals(res.locals.currentuser._id)
+    !res.locals.currUser &&
+    review.author._id.equals(res.locals.currUser._id)
   ) {
     req.flash("error", "NO-OWNER_SHIP");
     return res.redirect(`/listings/${id}`);

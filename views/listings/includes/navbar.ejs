@@ -42,10 +42,10 @@
       <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new">ADD LISTING</a>
 
-        <% if(!currentuser) { %>
+        <% if(!currUser) { %>
         <a class="nav-link" href="/singup"><b>SIGN-UP</b></a>
         <a class="nav-link" href="/login"><b>LOG-IN</b></a>
-        <% } %> <% if(!currentuser) { %>
+        <% } %> <% if(currUser) { %>
         <a class="nav-link" href="/logout"><b>LOG-OUT</b></a>
         <%} %>
       </div>

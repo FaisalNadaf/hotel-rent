@@ -55,16 +55,6 @@ app.use(
   })
 );
 
-app.use(flash());
-
-app.use((req, res, next) => {
-  res.locals.sucess = req.flash("sucess");
-  res.locals.error = req.flash("error");
-  console.log(res.locals.currentuser);
-  res.locals.currentuser = req.user;
-  next();
-});
-
 // app.get("/demoUser", wrapAsync(async(req,res)=>{
 //   let fakeUser= new User({
 //     email:"xys@gamil.com",
@@ -75,19 +65,32 @@ app.use((req, res, next) => {
 // }));
 
 /*---------------------------------------passport---------------------------------------------*/
-app.use(passport.initialize());
-app.use(passport.session());
+
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.id, done);
 });
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id).exec();
-    done(null, user.id); // Pass the user object, not just the user id
+    done(null, user); // Pass the user object, not just the user id
   } catch (err) {
     done(err, null);
   }
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+/*---------------------------------------------------------------------------- */
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.sucess = req.flash("sucess");
+  res.locals.error = req.flash("error");
+  console.log("current user :", req.user);
+  res.locals.currUser = req.user;
+  next();
 });
 /*---------------------------------------routes---------------------------------------------*/
 app.use("/listings", listingsRouter);
