@@ -11,7 +11,6 @@ module.exports.showListing = async (req, res) => {
     req.flash("error", "listing does not exsisit");
     res.redirect("/listings");
   }
-  console.log(listing);
   res.render("listings/show.ejs", { listing });
 };
 
@@ -30,7 +29,6 @@ module.exports.createListing = async (req, res, next) => {
   const newListing = new listing(req.body.listing);
   let url = req.file.path;
   let filename = req.file.filename;
-  console.log(req.user);
   newListing.owner = req.user;
   newListing.image = { url, filename };
   await newListing.save();
@@ -68,7 +66,6 @@ module.exports.destroyListing = async (req, res) => {
   let { id } = req.params;
   let deletedListing = await Listing.findByIdAndDelete(id);
   console.log(deletedListing);
-
   req.flash("sucess", "deleted sucessfull");
   res.redirect("/listings");
 };
