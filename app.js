@@ -27,7 +27,7 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 
 /*------------------------------------------------------------------------------------*/
-let mongo_url = "mongodb://127.0.0.1:27017/wonderlust";
+let mongo_url = "mongodb://localhost:27017/wonderlust";
 /*---------------------------------------main---------------------------------------------*/
 main()
   .then(() => {
