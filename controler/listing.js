@@ -31,6 +31,7 @@ module.exports.createListing = async (req, res, next) => {
   let filename = req.file.filename;
   newListing.owner = req.user;
   newListing.image = { url, filename };
+  console.log(newListing);
   await newListing.save();
   req.flash("sucess", "new listing added sucessfull");
   res.redirect("/listings");

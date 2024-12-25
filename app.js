@@ -1,5 +1,7 @@
+/** @format */
+
 if (process.env.NODE_ENV != "production") {
-  require("dotenv").config();
+	require("dotenv").config();
 }
 const express = require("express");
 const app = express();
@@ -27,32 +29,32 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 
 /*------------------------------------------------------------------------------------*/
-let mongo_url = "mongodb://localhost:27017/wonderlust";
+let mongo_url = process.env.MONGO_URL;
 /*---------------------------------------main---------------------------------------------*/
 main()
-  .then(() => {
-    console.log("mongodb connected");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+	.then(() => {
+		console.log("mongodb connected");
+	})
+	.catch((err) => {
+		console.log(err);
+	});
 
 async function main() {
-  await mongoose.connect(mongo_url);
+	await mongoose.connect(mongo_url);
 }
 
 /*---------------------------------------express-session---------------------------------------------*/
 app.use(
-  session({
-    secret: "NCASUBElasdklms", // You should replace this with a strong and unique secret key
-    resave: false,
-    saveUninitialized: true, // Explicitly set the saveUninitialized option
-    cookie: {
-      expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      httpOnly: true,
-    },
-  })
+	session({
+		secret: "NCASUBElasdklms", // You should replace this with a strong and unique secret key
+		resave: false,
+		saveUninitialized: true, // Explicitly set the saveUninitialized option
+		cookie: {
+			expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+			maxAge: 7 * 24 * 60 * 60 * 1000,
+			httpOnly: true,
+		},
+	}),
 );
 
 // app.get("/demoUser", wrapAsync(async(req,res)=>{
@@ -68,15 +70,15 @@ app.use(
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser((user, done) => {
-  done(null, user.id, done);
+	done(null, user.id, done);
 });
 passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id).exec();
-    done(null, user); // Pass the user object, not just the user id
-  } catch (err) {
-    done(err, null);
-  }
+	try {
+		const user = await User.findById(id).exec();
+		done(null, user); // Pass the user object, not just the user id
+	} catch (err) {
+		done(err, null);
+	}
 });
 
 app.use(passport.initialize());
@@ -86,11 +88,12 @@ app.use(passport.session());
 app.use(flash());
 
 app.use((req, res, next) => {
-  res.locals.sucess = req.flash("sucess");
-  res.locals.error = req.flash("error");
-  console.log("current user :", req.user);
-  res.locals.currUser = req.user;
-  next();
+	res.locals.sucess = req.flash("sucess");
+	res.locals.error = req.flash("error");
+	// console.log(res.locals.error);
+	// console.log("current user :", req.user);
+	res.locals.currUser = req.user;
+	next();
 });
 /*---------------------------------------routes---------------------------------------------*/
 app.use("/listings", listingsRouter);
@@ -103,14 +106,14 @@ app.use("/", userRouter);
 
 /*---------------------------------------ERROR HANDLING---------------------------------------------*/
 app.all("*", (req, res, next) => {
-  next(new ExpressError(404, "page not found!"));
+	next(new ExpressError(404, "page not found!"));
 });
 
 app.use((err, req, res, next) => {
-  let { statusCode = 500, message = "somthing went wrong" } = err;
-  res.render("./listings/error.ejs", { statusCode, message });
+	let { statusCode = 500, message = "somthing went wrong" } = err;
+	res.render("./listings/error.ejs", { statusCode, message });
 });
 /*---------------------------------------port---------------------------------------------*/
 app.listen(8080, () => {
-  console.log("server started on port 8080");
+	console.log("server started on port 8080");
 });
